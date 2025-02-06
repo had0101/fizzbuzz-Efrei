@@ -30,14 +30,15 @@ jobs:
       - name: Exécuter les tests unitaires  # Étape pour exécuter les tests
         run: python test_unitaire.py  # Exécute le script de test 
 
-      - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code
+      - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code en locale
         run: |
           pip install coverage  
           coverage run -m unittest discover  
           coverage report -m  
 
-      - name: Explorer le concept de "code coverage" sur GitHub Actions  # Mesurer la couverture de code dans GitHub Actions
+      - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur git
         run: |
+          pip install coverage
           coverage run -m unittest discover  
-          coverage xml  
-          bash <(curl -s https://codecov.io/bash)  
+          coverage report -m 
+
