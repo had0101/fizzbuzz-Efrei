@@ -34,7 +34,7 @@ jobs:
           python -m xmlrunner discover -o test-reports/
 
       - name: Publier le rapport des tests unitaires
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Test Report
           path: test-reports/
@@ -46,7 +46,7 @@ jobs:
           coverage report -m  # Affiche la couverture 
 
       - name: Publier le rapport de couverture de code
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Coverage Report
           path: coverage.xml
