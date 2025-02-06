@@ -29,7 +29,6 @@ jobs:
 
       - name: Exécuter les tests unitaires  # Étape pour exécuter les tests
         run: |
-          python test_unitaire.py  # Exécute le script de test
           pip install unittest-xml-reporting
           python -m xmlrunner discover -o test-reports/
 
@@ -39,24 +38,22 @@ jobs:
           name: Test Report
           path: test-reports/
 
-      - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code en locale
+      - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur git
         run: |
-          pip install coverage  
-          coverage run --source=. -m unittest discover
-          coverage report -m  # Affiche la couverture 
+          pip install coverage
+          coverage run --source=. -m unittest discover  
+          coverage report -m  # Affiche la couverture dans la console GitHub Actions
+          coverage xml -o coverage.xml
+
+      - name: Vérifier si coverage.xml existe
+        run: ls -l coverage.xml || echo "coverage.xml NOT FOUND"
 
       - name: Publier le rapport de couverture de code
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: Coverage Report
           path: coverage.xml
-
-      - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur git
-        run: |
-          pip install coverage
-          coverage run --source=. -m unittest discover
-          coverage xml -o coverage.xml
-          coverage report -m  # Affiche la couverture dans la console GitHub Actions
 
       - name: Vérifier la qualité du code (PEP8)
         run: |
