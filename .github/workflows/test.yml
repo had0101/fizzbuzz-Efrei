@@ -42,7 +42,7 @@ jobs:
       - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code en locale
         run: |
           pip install coverage  
-          coverage run -m unittest discover  
+          coverage run --source=. -m unittest discover
           coverage report -m  # Affiche la couverture 
 
       - name: Publier le rapport de couverture de code
@@ -54,8 +54,8 @@ jobs:
       - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur git
         run: |
           pip install coverage
-          coverage run -m unittest discover  
-          coverage xml
+          coverage run --source=. -m unittest discover
+          coverage xml -o coverage.xml
           coverage report -m  # Affiche la couverture dans la console GitHub Actions
 
       - name: Vérifier la qualité du code (PEP8)
