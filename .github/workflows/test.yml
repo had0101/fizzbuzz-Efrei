@@ -30,8 +30,8 @@ jobs:
       - name: Exécuter les tests unitaires  # Étape pour exécuter les tests
         run: python test_unitaire.py  # Exécute le script de test 
              pip install unittest-xml-reporting
+             
              python -m xmlrunner discover -o test-reports/
-
 
       - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code en locale
         run: |
