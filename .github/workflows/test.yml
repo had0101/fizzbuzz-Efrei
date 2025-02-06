@@ -77,7 +77,7 @@ jobs:
           sphinx-build -b html docs/source docs/build
 
       - name: Publier la documentation
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Documentation
           path: docs/build/
