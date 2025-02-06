@@ -1,47 +1,46 @@
 name: FizzBuzz Tests 
 
 on:
-  push:  # Déclenche l'exécution après chaque push sur main
+  push:  
     branches:
-      - main  # Se déclenche sur la branche main
+      - main  
   pull_request:  
     branches:
       - main  
-  workflow_dispatch:  # Permet d'exécuter les tests manuellement depuis l'interface GitHub Actions
+  workflow_dispatch:  
 
 jobs:
-  test:  # Définit un job appelé "test"
-    runs-on: ubuntu-latest  # Spécifie que le job s'exécutera sur une machine virtuelle Ubuntu la plus récente
+  test:  
+    runs-on: ubuntu-latest  
 
     steps:
-      - name: Cloner le dépôt  # Nom de l'étape affiché dans GitHub Actions
-        uses: actions/checkout@v3  # Utilise l'action officielle de GitHub pour récupérer le code du dépôt
+      - name: Cloner le dépôt  
+        uses: actions/checkout@v3  
 
-      - name: Configurer Python  # Étape pour installer la version correcte de Python
-        uses: actions/setup-python@v4  # Utilise l'action officielle pour configurer Python
+      - name: Configurer Python  
+        uses: actions/setup-python@v4  
         with:
-          python-version: "3.10"  # Spécifie que Python 3.10 doit être utilisé
+          python-version: "3.10"  
 
-      - name: Installer les dépendances  # Étape pour installer les dépendances du projet
+      - name: Installer les dépendances  
         run: |
-          python -m pip install --upgrade pip  # Met à jour pip pour garantir la dernière version
-          pip install -r requirements.txt || echo "No requirements.txt found"  # Installe les dépendances si le fichier requirements.txt existe, sinon affiche un message
+          python -m pip install --upgrade pip  
+          pip install -r requirements.txt || echo "No requirements.txt found"  
 
-      - name: Exécuter les tests unitaires  # Étape pour exécuter les tests
-        run: python test_unitaire.py  # Exécute le script de test 
-             pip install unittest-xml-reporting
-             
-             python -m xmlrunner discover -o test-reports/
+      - name: Exécuter les tests unitaires  
+        run: |
+          pip install unittest-xml-reporting  
+          python -m xmlrunner discover -o test-reports/  
+          python test_unitaire.py  
 
-      - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code en locale
+      - name: Explorer le concept de "code coverage" en exécution locale  
         run: |
           pip install coverage  
           coverage run -m unittest discover  
-          coverage report -m  # Affiche la couverture 
+          coverage report -m  
 
-      - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur git
+      - name: Explorer la couverture de code en local et sur GitHub Actions  
         run: |
           pip install coverage
           coverage run -m unittest discover  
-          coverage report -m  # Affiche la couverture dans la console GitHub Actions
-
+          coverage report -m  
