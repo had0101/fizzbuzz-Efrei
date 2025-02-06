@@ -66,14 +66,13 @@ jobs:
           name: Flake8 Report
           path: flake8-report.txt
 
-      - name: Générer la documentation
-        run: |
-          pip install sphinx
-          sphinx-quickstart -q -p "FizzBuzz" -a "Auteur" -v "1.0" docs
-          sphinx-apidoc -o docs/source .
-          echo "import os, sys; sys.path.insert(0, os.path.abspath('../'))" >> docs/source/conf.py
-          echo "extensions = ['sphinx.ext.autodoc']" >> docs/source/conf.py
-          sphinx-build -b html docs/source docs/build
+      - name: Générer la configuration Sphinx (conf.py)
+          run: |
+            pip install sphinx
+            sphinx-quickstart -q -p "FizzBuzz" -a "Auteur" -v "1.0" --sep --dot _ -t docs/source
+            echo "import os, sys; sys.path.insert(0, os.path.abspath('../../'))" >> docs/source/conf.py
+            echo "extensions = ['sphinx.ext.autodoc']" >> docs/source/conf.py
+  
   
       - name: Vérifier la présence du fichier index.rst
         run: |
