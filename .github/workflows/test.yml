@@ -36,7 +36,7 @@ jobs:
           pip install coverage  
           coverage run -m unittest discover  
           coverage report -m  
-        - name: Commit et push les modifications  
+      - name: Commit et push les modifications  
         run: |
             git config --global user.name "GitHub Actions Bot"
             git config --global user.email "actions@github.com"
