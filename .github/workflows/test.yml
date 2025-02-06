@@ -64,7 +64,7 @@ jobs:
           flake8 --max-line-length=100 --output-file=flake8-report.txt || true
 
       - name: Publier le rapport de contrôle qualité
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Flake8 Report
           path: flake8-report.txt
