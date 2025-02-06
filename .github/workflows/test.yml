@@ -39,7 +39,7 @@ jobs:
           coverage run -m unittest discover  
           coverage report -m  # Affiche la couverture 
 
-      - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur   git
+      - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur    git
         run: |
           pip install coverage
           coverage run -m unittest discover  
