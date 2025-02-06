@@ -31,13 +31,16 @@ jobs:
           pip install unittest-xml-reporting  
           python -m xmlrunner discover -o test-reports/  
           python test_unitaire.py  
-      - name: Explorer le concept de "code coverage" en exécution locale  
+      - name: Explorer le concept de "code coverage"  
         run: |
           pip install coverage  
           coverage run -m unittest discover  
           coverage report -m  
-      - name: Explorer la couverture de code en local et sur GitHub Actions  
+        - name: Commit et push les modifications  
         run: |
-          pip install coverage
-          coverage run -m unittest discover  
-          coverage report -m  
+            git config --global user.name "GitHub Actions Bot"
+            git config --global user.email "actions@github.com"
+            git add README.md
+            git commit -m "Mise à jour automatique du README avec la couverture de code"
+            git push
+        continue-on-error: true
