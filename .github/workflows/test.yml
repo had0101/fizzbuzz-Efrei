@@ -39,21 +39,4 @@ jobs:
           coverage run -m unittest discover  
           coverage report -m > coverage.txt  # Sauvegarde le rapport dans un fichier
 
-      - name: Commit et push des modifications sur une nouvelle branche  
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
-            
-          git checkout -b update-readme  # Crée une nouvelle branche
-          git add README.md
-          git commit -m "Mise à jour automatique du README avec le code coverage"
-          git push origin update-readme  # Pousse sur la nouvelle branche
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
-      - name: Créer une Pull Request pour fusionner dans main  
-        run: |
-          gh pr create --title "Mise à jour automatique du README" --body "Cette PR met à jour automatiquement le README avec le taux de couverture des tests." --base main --head update-readme
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+
