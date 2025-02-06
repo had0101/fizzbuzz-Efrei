@@ -71,9 +71,10 @@ jobs:
           pip install sphinx
           sphinx-quickstart -q -p "FizzBuzz" -a "Auteur" -v "1.0" docs
           sphinx-apidoc -o docs/source .
-          echo "extensions = ['sphinx.ext.autodoc']" >> docs/source/conf.py  # Active autodoc
+          echo "import os, sys; sys.path.insert(0, os.path.abspath('../'))" >> docs/source/conf.py
+          echo "extensions = ['sphinx.ext.autodoc']" >> docs/source/conf.py
           sphinx-build -b html docs/source docs/build
-
+  
       - name: Vérifier la présence du fichier index.rst
         run: |
           ls -l docs/source/index.rst || echo "index.rst NOT FOUND"
