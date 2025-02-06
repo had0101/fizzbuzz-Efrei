@@ -1,17 +1,17 @@
-name: FizzBuzz Tests 
+name: FizzBuzz Tests
 
 on:
-  push:  # Déclenche l'exécution après chaque push sur main
+  push:
     branches:
-      - main  # Se déclenche sur la branche main
-  pull_request:  
+      - main
+  pull_request:
     branches:
-      - main  
-  workflow_dispatch:  # Permet d'exécuter les tests manuellement depuis l'interface GitHub Actions
+      - main
+  workflow_dispatch:
 
 jobs:
-  test:  # Définit un job appelé "test"
-    runs-on: ubuntu-latest  # Spécifie que le job s'exécutera sur une machine virtuelle Ubuntu la plus récente
+  test:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Cloner le dépôt  # Nom de l'étape affiché dans GitHub Actions
@@ -28,7 +28,16 @@ jobs:
           pip install -r requirements.txt || echo "No requirements.txt found"  # Installe les dépendances si le fichier requirements.txt existe, sinon affiche un message
 
       - name: Exécuter les tests unitaires  # Étape pour exécuter les tests
-        run: python test_unitaire.py  # Exécute le script de test 
+        run: |
+          python test_unitaire.py  # Exécute le script de test
+          pip install unittest-xml-reporting
+          python -m xmlrunner discover -o test-reports/
+
+      - name: Publier le rapport des tests unitaires
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Report
+          path: test-reports/
 
       - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code en locale
         run: |
@@ -36,9 +45,39 @@ jobs:
           coverage run -m unittest discover  
           coverage report -m  # Affiche la couverture 
 
+      - name: Publier le rapport de couverture de code
+        uses: actions/upload-artifact@v3
+        with:
+          name: Coverage Report
+          path: coverage.xml
+
       - name: Explorer la couverture de code en local et sur GitHub Actions # Mesurer la couverture de code sur git
         run: |
           pip install coverage
           coverage run -m unittest discover  
+          coverage xml
           coverage report -m  # Affiche la couverture dans la console GitHub Actions
 
+      - name: Vérifier la qualité du code (PEP8)
+        run: |
+          pip install flake8
+          flake8 --max-line-length=100 --output-file=flake8-report.txt || true
+
+      - name: Publier le rapport de contrôle qualité
+        uses: actions/upload-artifact@v3
+        with:
+          name: Flake8 Report
+          path: flake8-report.txt
+
+      - name: Générer la documentation
+        run: |
+          pip install sphinx
+          sphinx-quickstart -q -p "FizzBuzz" -a "Auteur" -v "1.0" docs
+          sphinx-apidoc -o docs/source .
+          sphinx-build -b html docs/source docs/build
+
+      - name: Publier la documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: Documentation
+          path: docs/build/
