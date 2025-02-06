@@ -32,6 +32,7 @@ jobs:
              pip install unittest-xml-reporting
              python -m xmlrunner discover -o test-reports/
 
+
       - name: Explorer le concept de "code coverage" en exécution locale  # Mesurer la couverture de code en locale
         run: |
           pip install coverage  
