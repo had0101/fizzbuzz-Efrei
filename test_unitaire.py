@@ -2,7 +2,7 @@ import unittest
 from fizzbuzz.main import fizzbuzz
 
 
-class TestFizzBuzz(unittest.TestCase):
+class TestFizzBuzz(unittest.TestCase) :
     def test_fizz(self):
         multiples_of_3 = [3, 6, 9, 12, 18, 21, 24, 27, 33, 36, 39]
         for num in multiples_of_3:
