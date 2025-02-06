@@ -36,11 +36,26 @@ jobs:
           pip install coverage  
           coverage run -m unittest discover  
           coverage report -m  
-      - name: Commit et push les modifications  
+          - name: Générer et enregistrer le rapport de couverture  
+          run: |
+            pip install coverage
+            coverage run -m unittest discover  
+            coverage report -m > coverage.txt  # Sauvegarde le rapport dans un fichier
+  
+      - name: Mettre à jour le README.md avec la couverture  
         run: |
-            git config --global user.name "GitHub Actions Bot"
+            echo "## Couverture de code" > README.md
+            echo "" >> README.md
+            echo '```' >> README.md
+            cat coverage.txt >> README.md  # Ajoute le rapport de couverture
+            echo '```' >> README.md
+  
+      - name: Commit et push des modifications  
+        run: |
+            git config --global user.name "github-actions"
             git config --global user.email "actions@github.com"
             git add README.md
-            git commit -m "Mise à jour automatique du README avec la couverture de code"
+            git commit -m "Mise à jour automatique du README avec le code coverage"
             git push
-        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
