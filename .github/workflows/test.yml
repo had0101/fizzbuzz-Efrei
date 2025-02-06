@@ -3,11 +3,11 @@ name: FizzBuzz Tests
 on:
   push:
     branches:
-      - main  
+      - main  # Exécuter les tests après chaque push sur main
   pull_request:
     branches:
-      - main  
-  workflow_dispatch:  
+      - main  # Exécuter les tests sur chaque PR vers main
+  workflow_dispatch:  # Permet d'exécuter les tests manuellement depuis GitHub
 
 jobs:
   test:
