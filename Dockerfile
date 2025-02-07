@@ -1,14 +1,14 @@
-# Utiliser une image Python officielle comme base
+# Utiliser l'image officielle de Python
 FROM python:3.10
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copier tous les fichiers dans le conteneur
+# Copier le contenu du projet dans le conteneur
 COPY . .
 
-# Installer les dépendances
-RUN pip install --no-cache-dir -r requirements.txt
+# Installer les dépendances si elles existent
+RUN pip install --no-cache-dir -r requirements.txt || echo "No requirements.txt found"
 
-# Définir la commande par défaut pour exécuter le programme
-CMD ["python", "main.py"]
+# Définir la commande par défaut pour exécuter les tests
+CMD ["python", "-m", "unittest", "discover", "-s", "fizzbuzz"]
