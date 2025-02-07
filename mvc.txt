@@ -1,0 +1,25 @@
+mvc
+index 
+mogoose
+cluster (esemble de machines) répartition de charge pour la données 
+
+nt4vMcFNzIWLtlNt
+mongodb+srv://hadilneji774:nt4vMcFNzIWLtlNt@efrei.zybdf.mongodb.net/api
+
+postman
+ouvrir ubunto : cd ecole/efrei/XMAS-DE4-G2/api
+npm run dev
+
+https://cloud.mongodb.com/v2/67a1dd7f6c53eb486e766460#/metrics/replicaSet/67a1dea25b33592eed50d119/explorer/api/albums/find
+
+https://docs.google.com/document/d/1cxMZ5Dx9zZXo56zxH3uD0F6KqnZaih3EHBPYM3sYvv0/edit?tab=t.0
+
+
+
+
+tp 15%
+exposé 15%
+Groupe 25%
+QCM 45%
+devloppement continue : 
+livraison continue : les pratqiues technique et humaine pour réduire le temps 
