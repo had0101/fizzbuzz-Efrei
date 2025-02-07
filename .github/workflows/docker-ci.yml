@@ -1,8 +1,7 @@
- 
 name: Docker Build & Test
 
 on:
-  push: ##
+  push:
     branches:
       - docker1  
   pull_request:
