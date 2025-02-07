@@ -11,4 +11,4 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt || echo "No requirements.txt found"
 
 # Définir la commande par défaut pour exécuter les tests
-CMD ["python", "-m", "unittest", "discover", "-s", "fizzbuzz"]
+CMD ["python", "-m", "unittest", "discover", "-s", "tests"]
