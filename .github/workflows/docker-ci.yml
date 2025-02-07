@@ -1,8 +1,7 @@
-
 name: Docker Build & Test
 
 on:
-  push: #
+  push:
     branches:
       - docker1  
   pull_request:
@@ -17,7 +16,15 @@ jobs:
       - name: Cloner le dépôt
         uses: actions/checkout@v3
 
-      - name: Construire et tester avec Docker
+      - name: Créer un répertoire temporaire pour l'image Docker
         run: |
-          docker build -t fizzbuzz-image .
-          docker run --rm fizzbuzz-image #
+          mkdir temp_docker_build
+          cp -r * temp_docker_build/
+
+      - name: Construire l'image Docker
+        run: |
+          docker build -t fizzbuzz-image temp_docker_build
+
+      - name: Lancer les tests avec Docker
+        run: |
+          docker run --rm fizzbuzz-image
