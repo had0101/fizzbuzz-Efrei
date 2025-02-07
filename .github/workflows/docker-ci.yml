@@ -1,0 +1,23 @@
+ 
+name: Docker Build & Test
+
+on:
+  push:
+    branches:
+      - docker  
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: Construire et tester avec Docker
+        run: |
+          docker build -t fizzbuzz-image .
+          docker run --rm fizzbuzz-image
