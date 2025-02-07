@@ -1,0 +1,26 @@
+name: Auto PR on Push to Feature Branch  
+
+on:
+  push:
+    branches:
+      - "feature/**"  # Déclenche uniquement pour les branches feature/
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cloner le dépôt  
+        uses: actions/checkout@v3  
+
+      - name: Créer une Pull Request  
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}  # Utilise le token GitHub
+          branch: ${{ github.ref_name }}  # Utilise la branche actuelle
+          base: main  # La PR cible la branche "main"
+          title: "Automated PR - ${{ github.ref_name }}"
+          body: "Cette PR a été automatiquement générée après un `git push` sur la branche ${{ github.ref_name }}."
+          labels: "automated-pr"
+          draft: false  # Mettre à `true` si on veut une PR en brouillon
+ 
