@@ -2,7 +2,7 @@
 name: Docker Build & Test
 
 on:
-  push:
+  push: #
     branches:
       - docker1  
   pull_request:
@@ -20,4 +20,4 @@ jobs:
       - name: Construire et tester avec Docker
         run: |
           docker build -t fizzbuzz-image .
-          docker run --rm fizzbuzz-image
+          docker run --rm fizzbuzz-image #
