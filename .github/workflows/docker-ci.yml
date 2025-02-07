@@ -1,10 +1,10 @@
-name: Dockerized FizzBuzz Tests
+
+name: Docker Build & Test
 
 on:
   push:
     branches:
-      - main
-      - docker1  # Déclenche l'action sur la branche Docker
+      - docker1  
   pull_request:
     branches:
       - main
