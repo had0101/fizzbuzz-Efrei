@@ -3,7 +3,7 @@ name: Auto Create Branch and PR
 on:
   push:
     branches:
-      - main  # Se déclenche à chaque push sur main
+      - main  # Se déclenche à chaque push su  r main
 
 jobs:
   create_branch_and_pr:
