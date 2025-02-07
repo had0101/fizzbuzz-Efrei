@@ -1,8 +1,8 @@
-name: FizzBuzz Tests  
+name: FizzBuzz Tests 
 
 on:
   push:  
-    branches:
+    branches: #
       - main  
   pull_request:  
     branches:
@@ -17,7 +17,7 @@ jobs:
       - name: Cloner le dépôt  
         uses: actions/checkout@v3  
 
-      - name: Configurer Python et installer les dépendances  
+      - name: Configurer Python 
         uses: actions/setup-python@v4  
         with:
           python-version: "3.10"  
@@ -33,22 +33,10 @@ jobs:
           python -m xmlrunner discover -o test-reports/  
           python test_unitaire.py  
 
-      - name: Explorer le concept de "code coverage"  
+      - name: Explorer le concept de "code coverage"  #
         run: |
           pip install coverage  
           coverage run -m unittest discover  
           coverage report -m > coverage.txt  # Sauvegarde le rapport dans un fichier
 
-  deploy_docs:
-    if: github.ref == 'refs/heads/main'  # Ne s'exécute que sur main
-    needs: test  # Attend la fin du job "test" et ne s'exécute que s'il réussit
-    runs-on: ubuntu-latest  
-    steps:
-      - name: Générer la documentation avec Sphinx  
-        run: |
-          pip install sphinx  
-          sphinx-build -b html docs/source docs/build  
 
-      - name: Déployer la documentation  
-        run: |
-          echo "Déploiement en cours..."
