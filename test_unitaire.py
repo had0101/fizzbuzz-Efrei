@@ -7,7 +7,7 @@ class TestFizzBuzz(unittest.TestCase) :
         multiples_of_3 = [3, 6, 9, 12, 18, 21, 24, 27, 33, 36, 39]
         for num in multiples_of_3:
             with self.subTest(num=num):
-                self.assertEqual(fizzbuzz(num), "Fizz")
+                self.assertEqual(fizzbuzz(num), "fizz")
 
     def test_buzz(self):
         multiples_of_5 = [5, 10, 20, 25, 35, 40, 50, 55, 65, 70, 80]
